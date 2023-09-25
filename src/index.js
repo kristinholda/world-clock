@@ -57,15 +57,16 @@ function updateTime() {
 }
 
 function updateCity(event) {
-  let cityTimeZone = event.target.value;
-  if (cityTimeZone === "current") {
-    cityTimeZone = moment.tz.guess();
-  }
-  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
-  let cityTime = moment().tz(cityTimeZone);
-  let citiesElement = document.querySelector("#cities");
+  setInterval(function () {
+    let cityTimeZone = event.target.value;
+    if (cityTimeZone === "current") {
+      cityTimeZone = moment.tz.guess();
+    }
+    let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+    let cityTime = moment().tz(cityTimeZone);
+    let citiesElement = document.querySelector("#cities");
 
-  citiesElement.innerHTML = `
+    citiesElement.innerHTML = `
   <div class="city">
           <div>
             <h2>${cityName}</h2>
@@ -76,6 +77,7 @@ function updateCity(event) {
             )} <small>${cityTime.format("A")}</small></div>
         </div>
         <a href="/">All cities</a>`;
+  }, 1000);
 }
 
 updateTime();
